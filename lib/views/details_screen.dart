@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../components/text_component.dart';
@@ -27,7 +29,7 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(centerTitle: true, title: Text("Friends Details")),
+      appBar: AppBar(centerTitle: true, title: const Text("Friends Details")),
       body: Center(
         child: Container(
           margin: const EdgeInsets.all(50),
@@ -94,14 +96,14 @@ class DetailsScreen extends StatelessWidget {
                         }
                       },
                       child: TextComponent(
-                        "Email:$email ",
+                        "Email:$email",
                         textAlign: TextAlign.start,
                         fontSize: 12,
                       ),
                     ),
                     GestureDetector(
                       onTap: () async {
-                        Uri phoneno = Uri.parse(phone!);
+                        Uri phoneno = Uri.parse('tel:${phone!}');
                         if (await launchUrl(phoneno)) {
                           //dialer opened
                         } else {

@@ -5,7 +5,6 @@ import 'package:texontask/utils/style.dart';
 import 'package:texontask/views/profile_screen.dart';
 
 import '../controller/ui_controller.dart';
-import 'details_screen.dart';
 import 'home_screen.dart';
 
 class DashBoardScreen extends StatefulWidget {
