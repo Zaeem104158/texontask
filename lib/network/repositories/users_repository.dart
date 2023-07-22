@@ -13,7 +13,7 @@ class UsersRepository {
   }
 
   //Get users repository
-  void getMailAPI(
+  void getUsersAPI(
       String url, ResponseCallback<UsersResponseModel?, String?> callback) {
     _apiClient.getRequest(url, (response, error) {
       if (response != null) {

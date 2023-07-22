@@ -14,8 +14,8 @@ class UsersController extends GetxController {
   }
 
   //Get Mail controller.
-  void getMail() {
-    _usersRepository.getMailAPI(usersEndPoint, (response, error) {
+  void getUsers() {
+    _usersRepository.getUsersAPI(usersEndPoint, (response, error) {
       if (response != null) {
         users.value = response.results;
       } else {}
