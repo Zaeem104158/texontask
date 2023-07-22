@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:texontask/utils/style.dart';
+import 'package:texontask/views/profile_screen.dart';
 
 import '../controller/ui_controller.dart';
 import 'details_screen.dart';
@@ -17,7 +18,7 @@ class DashBoardScreen extends StatefulWidget {
 class _DashBoardScreenState extends State<DashBoardScreen> {
   final List<Widget> screens = const [
     HomeScreen(),
-    DetailsScreen(),
+    ProfileScreen(),
   ];
 
   @override
@@ -56,7 +57,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             title: Obx(() => Text(
                 uiController.bottomNavigationControlSelectedIndex.value == 0
                     ? "Home Screen"
-                    : "Details Screen")),
+                    : "Profile Screen")),
           ),
           body: Obx(
             () => screens[
