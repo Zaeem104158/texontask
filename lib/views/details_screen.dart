@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:texontask/models/users_respone_model.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import '../components/text_component.dart';
-import '../utils/constants.dart';
 import '../utils/size_config.dart';
 import '../utils/style.dart';
 
@@ -16,7 +13,7 @@ class DetailsScreen extends StatelessWidget {
 
   String? country;
 
-  String? email;
+  String email;
 
   String? phone;
   DetailsScreen(
@@ -25,7 +22,7 @@ class DetailsScreen extends StatelessWidget {
       this.state,
       this.city,
       this.country,
-      this.email,
+      required this.email,
       this.phone});
   @override
   Widget build(BuildContext context) {
@@ -57,11 +54,14 @@ class DetailsScreen extends StatelessWidget {
                 ),
                 alignment: Alignment.topLeft,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.network(
-                      image!,
-                      alignment: Alignment.center,
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Image.network(
+                        image!,
+                        alignment: Alignment.center,
+                      ),
                     ),
                     TextComponent(
                       "Country:$country ",
@@ -78,15 +78,41 @@ class DetailsScreen extends StatelessWidget {
                       textAlign: TextAlign.start,
                       fontSize: 12,
                     ),
-                    TextComponent(
-                      "Email:$email ",
-                      textAlign: TextAlign.start,
-                      fontSize: 12,
+                    GestureDetector(
+                      onTap: () async {
+                        String sendEmail = Uri.encodeComponent(email);
+                        String subject = Uri.encodeComponent("Hello Flutter");
+                        String body =
+                            Uri.encodeComponent("Hi! I'm Flutter Developer");
+
+                        Uri mail = Uri.parse(
+                            "mailto:$sendEmail?subject=$subject&body=$body");
+                        if (await launchUrl(mail)) {
+                          //email app opened
+                        } else {
+                          //email app is not opened
+                        }
+                      },
+                      child: TextComponent(
+                        "Email:$email ",
+                        textAlign: TextAlign.start,
+                        fontSize: 12,
+                      ),
                     ),
-                    TextComponent(
-                      "Phone:$phone ",
-                      textAlign: TextAlign.start,
-                      fontSize: 12,
+                    GestureDetector(
+                      onTap: () async {
+                        Uri phoneno = Uri.parse(phone!);
+                        if (await launchUrl(phoneno)) {
+                          //dialer opened
+                        } else {
+                          //dailer is not opened
+                        }
+                      },
+                      child: TextComponent(
+                        "Phone:$phone ",
+                        textAlign: TextAlign.start,
+                        fontSize: 12,
+                      ),
                     ),
                   ],
                 )),
